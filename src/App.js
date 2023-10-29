@@ -1,15 +1,26 @@
 import './App.css';
-import { useCounter } from './pages/useCounter';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Menu } from "./pages/Menu";
+import { Login } from "./pages/Login";
+import { Provider } from "react-redux";
+import { store } from './store';
 
 function App() {
-
-  const { count, increase, decrease, restart } = useCounter();
   return (
     <div className="App">
-      {count}
-      <button onClick={increase} >increase</button>
-      <button onClick={decrease} >decrease</button>
-      <button onClick={restart} >restart</button>
+      <Provider store={store}>
+        <Router>
+          <Link to="/" >Home</Link>
+          <Link to="/login" >Login</Link>
+          <Link to="/menu" >Menu</Link>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Router>
+      </Provider>
     </div >
   );
 }
