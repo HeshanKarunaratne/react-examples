@@ -18,6 +18,7 @@ export const Form = () => {
     const onSubmit = (data) => {
         console.log(data);
     }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <input type="text" placeholder="Full Name" {...register("fullName")} />
