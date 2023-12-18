@@ -1,65 +1,74 @@
 import React, { useState } from 'react';
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, TextField, Button } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import SaveIcon from '@mui/icons-material/Save';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  TextField,
+  Button,
+} from '@material-ui/core';
+import { Edit as EditIcon, Save as SaveIcon, Cancel as CancelIcon } from '@material-ui/icons';
 
 const EditableList = () => {
-  const initialItems = [
-    { id: 1, text: 'Item 1' },
-    { id: 2, text: 'Item 2' },
-    { id: 3, text: 'Item 3' },
-  ];
+  const [editIndex, setEditIndex] = useState(null);
+  const [editedValue, setEditedValue] = useState('');
+  const data = ["Item 1", "Item 2", "Item 3", "Item 4"];
 
-  const [items, setItems] = useState(initialItems);
-  const [editingId, setEditingId] = useState(null);
-  const [content, setContent] = useState('');
-
-  const handleEditClick = (id, text) => {
-    if (editingId === null) {
-      setEditingId(id);
-      setContent(text);
-    } else {
-      // If already editing, save the changes before starting to edit the new item
-      handleSaveClick(editingId);
-      setEditingId(id);
-      setContent(text);
-    }
+  const handleEditClick = (index, value) => {
+    setEditIndex(index);
+    setEditedValue(value);
   };
 
-  const handleSaveClick = (id) => {
-    const updatedItems = items.map((item) =>
-      item.id === id ? { ...item, text: content } : item
-    );
-    setItems(updatedItems);
-    setEditingId(null);
-    setContent('');
+  const handleSaveClick = (index) => {
+    
+    const newData = [...data];
+    newData[index] = editedValue;
+  
+    console.log(newData);
+    setEditIndex(index);
+  };
+
+  const handleCancelClick = () => {
+    // Reset edit state without saving
+    setEditIndex(null);
+  };
+
+  const handleInputChange = (event) => {
+    setEditedValue(event.target.value);
   };
 
   return (
     <List>
-      {items.map((item) => (
-        <ListItem key={item.id}>
-          {editingId === item.id ? (
+      {data.map((item, index) => (
+        <ListItem key={index}>
+          {editIndex === index ? (
             <>
               <TextField
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
+                value={editedValue}
+                onChange={handleInputChange}
                 fullWidth
               />
               <Button
                 variant="contained"
                 color="primary"
+                onClick={() => handleSaveClick(index)}
                 startIcon={<SaveIcon />}
-                onClick={() => handleSaveClick(item.id)}
               >
                 Save
               </Button>
+              <IconButton onClick={handleCancelClick} edge="end">
+                <CancelIcon />
+              </IconButton>
             </>
           ) : (
             <>
-              <ListItemText primary={item.text} />
+              <ListItemText primary={item} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="edit" onClick={() => handleEditClick(item.id, item.text)}>
+                <IconButton
+                  onClick={() => handleEditClick(index, item)}
+                  edge="end"
+                >
                   <EditIcon />
                 </IconButton>
               </ListItemSecondaryAction>

@@ -9,7 +9,7 @@ import { store } from './store';
 // import EditableList from './pages/EditableComponentV2';
 import EditableComponent from './pages/EditableComponent';
 import EditableList from './pages/EditableComponentV3';
-
+import SimpleModal from './pages/SimpleModal';
 function App() {
   return (
     <div className="App">
@@ -26,7 +26,8 @@ function App() {
         </Router>
       </Provider> */}
       {/* <MyList /> */}
-      <EditableList />
+      {/* <EditableList /> */}
+      <SimpleModal />
       {/* <EditableList /> */}
     </div >
   );
