@@ -10,6 +10,7 @@ import { store } from './store';
 import EditableComponent from './pages/EditableComponent';
 import EditableList from './pages/EditableComponentV3';
 import SimpleModal from './pages/SimpleModal';
+import FileUpload from './pages/FileUpload';
 function App() {
   return (
     <div className="App">
@@ -27,7 +28,8 @@ function App() {
       </Provider> */}
       {/* <MyList /> */}
       {/* <EditableList /> */}
-      <SimpleModal />
+      {/* <SimpleModal /> */}
+      <FileUpload />
       {/* <EditableList /> */}
     </div >
   );

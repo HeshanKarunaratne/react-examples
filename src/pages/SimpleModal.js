@@ -18,14 +18,14 @@ const SimpleModal = () => {
         <div>
             <button onClick={openModal}>Open Modal</button>
 
-            <ModalComponent isOpen={isModalOpen} onClose={closeModal}>
-                <div style={{ marginTop: '2rem' }}>
-                    <button onClick={console.log("btn1")}>1</button>
-                    <button onClick={console.log("btn2")}>2</button>
-                    <button onClick={console.log("btn3")}>3</button>
-                </div>
+                <ModalComponent isOpen={isModalOpen} onClose={closeModal}>
+                    <div style={{ marginTop: '2rem' }}>
+                        <button onClick={console.log("btn1")}>1</button>
+                        <button onClick={console.log("btn2")}>2</button>
+                        <button onClick={console.log("btn3")}>3</button>
+                    </div>
 
-            </ModalComponent>
+                </ModalComponent>
         </div>
     );
 };
